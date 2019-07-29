@@ -15,5 +15,10 @@
   "bugs": {
     "url": "https://github.com/Krakaw/github-issue-exporter/issues"
   },
-  "homepage": "https://github.com/Krakaw/github-issue-exporter#readme"
+  "homepage": "https://github.com/Krakaw/github-issue-exporter#readme",
+  "dependencies": {
+    "@octokit/rest": "^16.28.7",
+    "dotenv": "^8.0.0",
+    "json2csv": "^4.5.2"
+  }
 }
