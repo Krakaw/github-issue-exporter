@@ -18,7 +18,9 @@
   "homepage": "https://github.com/Krakaw/github-issue-exporter#readme",
   "dependencies": {
     "@octokit/rest": "^16.28.7",
+    "asana": "^0.17.1",
     "dotenv": "^8.0.0",
-    "json2csv": "^4.5.2"
+    "json2csv": "^4.5.2",
+    "yargs": "^13.3.0"
   }
 }

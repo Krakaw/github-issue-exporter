@@ -1,12 +1,79 @@
 require('dotenv').config()
-const { Parser } = require('json2csv');
+const yargs = require('yargs');
+const {Parser} = require('json2csv');
 const Octokit = require('@octokit/rest');
 
 const octokit = Octokit({
     auth: process.env.AUTH_TOKEN,
     userAgent: process.env.USER_AGENT,
-
 });
+
+const argv = yargs
+    .command('output', 'Output to [csv|asana]', {
+        type: {
+            description: 'Output to Asana or csv',
+            alias: 't',
+            choices: ['csv', 'asana'],
+            default: 'csv',
+            required: true
+        },
+        "asana-key": {
+            alias: 'ak',
+            description: 'Asana API key',
+            type: 'string',
+            default: process.env.ASANA_API_KEY,
+            required: true
+        },
+        "asana-board": {
+            alias: "ab",
+            description: 'Asana Board to send the issues to',
+            type: 'string',
+            required: true
+        }
+    })
+    .option('owner', {
+        alias: 'o',
+        description: 'Github Owner',
+        type: 'string',
+    })
+    .option('repo', {
+        array: true,
+        alias: 'r',
+        description: 'Github Repos',
+        type: 'string',
+    })
+    .demand(['owner', 'repo'])
+    .option('github-key', {
+        description: 'Github Auth Token',
+        type: 'string',
+        alias: 'gk',
+        default: process.env.GITHUB_AUTH_TOKEN,
+    })
+    .option('github-user-agent', {
+        alias: 'gua',
+        description: 'Github useragent (Your username)',
+        type: 'string',
+        default: process.env.GITHUB_USER_AGENT
+    })
+    .option('labels', {
+        array: true,
+        alias: 'l',
+        description: 'Github Labels to pull',
+        type: 'string',
+    })
+    .option('per-page', {
+        alias: 'l',
+        description: 'Github issues to pull per page',
+        type: 'number',
+        default: 100
+    })
+
+
+    .help()
+    .alias('help', 'h')
+    .argv;
+console.log(argv);
+process.exit();
 (async () => {
     const repos = process.env.REPOS.split(",");
     const owner = process.env.OWNER;
