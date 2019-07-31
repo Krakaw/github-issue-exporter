@@ -31,7 +31,7 @@ const argv = yargs
             }
         },
         "asana-workspace": {
-            alias: "ap",
+            alias: "aw",
             description: 'Asana workspace',
             type: 'string',
             check: (argv, arr) => {
@@ -89,11 +89,16 @@ const argv = yargs
 
 
 (async () => {
-    const {type, githubKey, githubUserAgent: userAgent, owner, repos, labels, perPage, issueState } = argv;
+    const {
+        type, githubKey, githubUserAgent: userAgent, owner, repos, labels, perPage, issueState,
+        asanaKey,
+        asanaWorkspace,
+        asanaProject
+    } = argv;
     let results = await github(githubKey, userAgent, owner, repos, labels, perPage, issueState);
     if (type === 'csv') {
         console.log(csv(results));
     } else if (type === 'asana') {
-
+        await asana(results, asanaKey, asanaWorkspace, asanaProject);
     }
 })();
