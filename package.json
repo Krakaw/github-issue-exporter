@@ -2,7 +2,7 @@
   "name": "github-issue-exporter",
   "version": "1.0.0",
   "description": "Pull issues and export them to Asana / CSV",
-  "main": "index.js",
+  "main": "cli.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -14,6 +14,9 @@
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Krakaw/github-issue-exporter/issues"
+  },
+  "bin": {
+    "github-issue-exporter": "./cli.js"
   },
   "homepage": "https://github.com/Krakaw/github-issue-exporter#readme",
   "dependencies": {
