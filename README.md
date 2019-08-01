@@ -25,7 +25,35 @@ npm install
 ## Usage
 
 ```sh
-node index.js output -t csv -o github-owner -r repo
+# Output issues to stdout in a csv
+node index.js output -t csv -o Krakaw -r github-issue-exporter
+```
+
+```sh
+# A more complex example
+node index.js output -t asana \
+                    --asana-key=ASANA_API_KEY \
+                    --asana-project=ASANA_PROJECT_ID \
+                    --asana-workspace=ASANA_WORKSPACE_ID \
+                --owner=Krakaw \
+                --repos="github-issue-exporter" "another-repo" \
+                --github-key=GITHUB_AUTH_TOKEN \
+                --github-user-agent=GITHUB_USER_NAME \
+                --labels="on or more" "labels" \
+                --issue-state=[open,closed,all]
+```
+```sh
+# Use environment variables from a .env files
+# --github-user-agent
+IE_GITHUB_USER_AGENT=
+# --github-key
+IE_GITHUB_KEY=
+# --asana-key
+IE_ASANA_KEY=
+# --asana-workspace
+IE_ASANA_WORKSPACE=
+# --asana-project
+IE_ASANA_PROJECT=
 ```
 
 ## Run tests
