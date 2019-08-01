@@ -26,21 +26,21 @@ npm install
 
 ```sh
 # Output issues to stdout in a csv
-node index.js output -t csv -o Krakaw -r github-issue-exporter
+./cli.js -o Krakaw -r github-issue-exporter
 ```
 
 ```sh
 # A more complex example
-node index.js output -t asana \
-                    --asana-key=ASANA_API_KEY \
-                    --asana-project=ASANA_PROJECT_ID \
-                    --asana-workspace=ASANA_WORKSPACE_ID \
-                --owner=Krakaw \
-                --repos="github-issue-exporter" "another-repo" \
-                --github-key=GITHUB_AUTH_TOKEN \
-                --github-user-agent=GITHUB_USER_NAME \
-                --labels="on or more" "labels" \
-                --issue-state=[open,closed,all]
+./cli.js    --type asana \
+            --asana-key=ASANA_API_KEY \
+            --asana-project=ASANA_PROJECT_ID \
+            --asana-workspace=ASANA_WORKSPACE_ID \
+            --owner=Krakaw \
+            --repos="github-issue-exporter" "another-repo" \
+            --github-key=GITHUB_AUTH_TOKEN \
+            --github-user-agent=GITHUB_USER_NAME \
+            --labels="on or more" "labels" \
+            --issue-state=[open,closed,all]
 ```
 ```sh
 # Use environment variables from a .env files

@@ -7,37 +7,35 @@ const github = require('./importers/github');
 
 const argv = yargs
     .env('IE')
-    .command('output', 'Output to [csv|asana]', {
-        type: {
-            description: 'Output to Asana or csv',
-            alias: 't',
-            choices: ['csv', 'asana'],
-            default: 'csv',
-            required: true
-        },
-        "asana-key": {
-            alias: 'ak',
-            description: 'Asana API key',
-            type: 'string',
-            check: (argv, arr) => {
-                return argv.type === 'csv' || (argv.type === 'asana' && argv.asanaKey)
-            }
-        },
-        "asana-project": {
-            alias: "ap",
-            description: 'Asana Project to send the issues to',
-            type: 'string',
-            check: (argv, arr) => {
-                return argv.type === 'csv' || (argv.type === 'asana' && argv.asanaProject)
-            }
-        },
-        "asana-workspace": {
-            alias: "aw",
-            description: 'Asana workspace',
-            type: 'string',
-            check: (argv, arr) => {
-                return argv.type === 'csv' || (argv.type === 'asana' && argv.asanaWorkspace)
-            }
+    .option(type, {
+        description: 'Output to Asana or csv',
+        alias: 't',
+        choices: ['csv', 'asana'],
+        default: 'csv',
+        required: true
+    })
+    .option("asana-key", {
+        alias: 'ak',
+        description: 'Asana API key',
+        type: 'string',
+        check: (argv, arr) => {
+            return argv.type === 'csv' || (argv.type === 'asana' && argv.asanaKey)
+        }
+    })
+    .option("asana-project", {
+        alias: "ap",
+        description: 'Asana Project to send the issues to',
+        type: 'string',
+        check: (argv, arr) => {
+            return argv.type === 'csv' || (argv.type === 'asana' && argv.asanaProject)
+        }
+    })
+    .option("asana-workspace", {
+        alias: "aw",
+        description: 'Asana workspace',
+        type: 'string',
+        check: (argv, arr) => {
+            return argv.type === 'csv' || (argv.type === 'asana' && argv.asanaWorkspace)
         }
     })
     .option('owner', {
