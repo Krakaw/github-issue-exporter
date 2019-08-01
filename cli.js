@@ -7,7 +7,7 @@ const github = require('./importers/github');
 
 const argv = yargs
     .env('IE')
-    .option(type, {
+    .option('type', {
         description: 'Output to Asana or csv',
         alias: 't',
         choices: ['csv', 'asana'],
@@ -51,7 +51,6 @@ const argv = yargs
         type: 'string',
         required: true
     })
-    .demand(['owner', 'repos'])
     .option('github-key', {
         description: 'Github Auth Token',
         type: 'string',
