@@ -1,6 +1,5 @@
 const Octokit = require('@octokit/rest');
-
-
+const progress = require('../progress');
 
 module.exports = async (githubKey, userAgent, owner, repos, labels = [], perPage, issueState) => {
     const octokit = Octokit({
@@ -9,8 +8,9 @@ module.exports = async (githubKey, userAgent, owner, repos, labels = [], perPage
     });
     let results = [];
     try {
-
+        progress.start(repos.length, 0);
         for (let i in repos) {
+
             let repo = repos[i];
             const options = octokit.issues.listForRepo.endpoint.merge({
                 owner,
@@ -20,6 +20,7 @@ module.exports = async (githubKey, userAgent, owner, repos, labels = [], perPage
                 state: issueState
             });
             results = results.concat(await octokit.paginate(options));
+            progress.update(+i + 1);
         }
     } catch (err) {
         console.error(err);
